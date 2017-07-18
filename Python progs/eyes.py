@@ -5,28 +5,38 @@ import datetime
 import time
 from os import listdir
 
-#Make list of .png files used for animation
-list = listdir("romiboeyes/Romibo excited resized/")
+#Make list of .png files used for animation of excited
+list = listdir("Romibo excited resized/")
 list.sort()
-list_for_romibo_excited=["romiboeyes/Romibo excited resized/"+ i for i in list]
+list_for_romibo_excited=["Romibo excited resized/"+ i for i in list]
 
 
-list = listdir("romiboeyes/Romibo indifferent (short) resized/")
+#Make list of .png files used for animation of indifferent
+list = listdir("Romibo indifferent (short) resized/")
 list.sort()
-list_for_romibo_indifferentShort=["romiboeyes/Romibo indifferent (short) resized/"+ i for i in list]
-#for boomerang animations
-list2 = ["romiboeyes/Romibo indifferent (short) resized/"+ i for i in list]
+list_for_romibo_indifferentShort=["Romibo indifferent (short) resized/"+ i for i in list]
+
+#reversing blinking1
+list2 = ["Romibo indifferent (short) resized/"+ i for i in list]
 list2.sort(reverse=True)
 list_for_romibo_indifferentShort=list_for_romibo_indifferentShort+ list2
 
-list = listdir("romiboeyes/eyelid blink/")
+
+#Make list of .png files used for animation of blinking
+list = listdir("eyelid blink/")
 list.sort()
-list_for_romibo_eyelidBlink=["romiboeyes/eyelid blink/"+ i for i in list]
-#for boomerang animations
-list2 = ["romiboeyes/eyelid blink/"+ i for i in list]
+list_for_romibo_eyelidBlink=["eyelid blink/"+ i for i in list]
+
+
+#reversing blinking2
+list2 = ["eyelid blink/"+ i for i in list]
 list2.sort(reverse=True)
 list_for_romibo_eyelidBlink=list_for_romibo_eyelidBlink+ list2
 
+#make a list of files for animation of curious emotion
+list = listdir("Romibo curious (long)/")
+list.sort()
+list_for_romibo_curious=["Romibo curious (long)/"+ i for i in list]
 
 #debug
 #print(list_for_romibo_excited)
@@ -35,13 +45,14 @@ count = 0
 excited_length = len(list_for_romibo_excited)
 indifferentShort_length = len(list_for_romibo_indifferentShort)
 blink_length = len(list_for_romibo_eyelidBlink)
+curious_length = len(list_for_romibo_curious)
 
-
-#emotion letters: N = normal, E = excited, I = indifferent short
+#emotion letters: N = normal, E = excited, I = indifferent short, T = twitterpated
+#C = curious
 emotion = 'N'
 busy = False            #Busyness of system
 timestamp = time.time()
-blinkInterval = 4 + random.random()*2                       #Set blink interval randomly between 4 to 6 seconds
+blinkInterval = 2 + random.random()*4                     #Set blink interval randomly between 2 to 6 seconds
 
 def animate():
     """ cycle through """
@@ -57,11 +68,11 @@ def animate():
         auto_blink()
     elif emotion == 'E':
         romibo_excited()
-    elif emotion == 'I':    
-        img = next(romibo_indifferentShort_pictures)            #Obtain name of next image in list
-        #change image in placeholder
-        label["image"] = img                                    #Change image in placeholder
-        print(img)
+    elif emotion == 'I':  
+		romibo_indifferent()
+    elif emotion == 'C':
+		romibo_curious()
+		
     root.after(delay, animate)
 
 def auto_blink():
@@ -79,10 +90,10 @@ def auto_blink():
             count = 0
             busy = False
             timestamp = time.time()
-            blinkInterval = 4 + random.random()*2                       #Set blink interval randomly between 4 to 6 seconds
+            blinkInterval = 2 + random.random()*4                       #Set blink interval randomly between 2 to 6 seconds
 
 def romibo_excited():
-    global timestamp, blinkInterval, busy, count
+    global label, timestamp, blinkInterval, busy, count
     if count<excited_length:
         busy = True
         img = next(romibo_excited_pictures)                     #Obtain name of next image in list
@@ -100,7 +111,49 @@ def romibo_excited():
         emotion = 'N'
         timestamp = time.time()
         
+		
+def romibo_indifferent():
+    global label, timestamp, blinkInterval, busy, count
+    if count<indifferentShort_length:
+        busy = True
+        img = next(romibo_indifferentShort_pictures)    		#Obtain name of next image in list
+		
+        #change image in placeholder
+        label["image"] = img                                    #Change image in placeholder
+        print(img)
+        count = count+1
+    if count == indifferentShort_length:
+        count = 0
+        busy = False
+        label["image"] = romibo_normal_picture
+        file = open("emotion.txt","w")
+        file.write("N")
+        file.close()
+        emotion = 'N'
+        timestamp = time.time()
+		
             
+
+def romibo_curious():
+    global label, timestamp, blinkInterval, busy, count
+    if count<curious_length:
+        busy = True
+        img = next(romibo_curious_pictures)    		#Obtain name of next image in list
+		
+        #change image in placeholder
+        label["image"] = img                                    #Change image in placeholder
+        print(img)
+        count = count+1
+    if count == curious_length:
+        count = 0
+        busy = False
+        label["image"] = romibo_normal_picture
+        file = open("emotion.txt","w")
+        file.write("N")
+        file.close()
+        emotion = 'N'
+        timestamp = time.time()
+		
 #Essential function for tkinter
 root = tk.Tk()
 
@@ -115,13 +168,15 @@ label.place(x=20,y=100)
 romibo_excited_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_excited)
 romibo_indifferentShort_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_indifferentShort)
 romibo_eyelidBlink_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_eyelidBlink)
-romibo_normal_picture = tk.PhotoImage(file="romiboeyes/Romibo_normal.png")
+romibo_curious_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_curious)
+romibo_normal_picture = tk.PhotoImage(file="romibo_normal_picture.png")
+
 
 # set initial eyes
 label["image"] = romibo_normal_picture
 
 # milliseconds
-delay = 30
+delay = 40
 
 animate()
 
@@ -138,12 +193,18 @@ root.bind("<Escape>", lambda e: e.widget.quit())
 for i in range(0, blink_length):
     img = next(romibo_eyelidBlink_pictures)
     print(img)
+
 for i in range(0, excited_length):
     img = next(romibo_excited_pictures)
     print(img)
-"""
-for i in range(0, indifferentShort_length-1):
+for i in range(0, indifferentShort_length):
     img = next(romibo_indifferentShort_pictures)
     print(img)
-"""
+
+
+for i in range(0, curious_length):
+    img = next(romibo_curious_pictures)
+    print(img)
+	
+
 root.mainloop()
