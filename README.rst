@@ -1,8 +1,9 @@
 Romibo-V8
 =========
+Romibo is a socially assistive robot, designed to engage and encourage young learners.
 
-Open-source code used for Romibo-V8
+Romibo-V8 is based off the $9 computer C.H.I.P (which is really cheap!)
 
-This code is based on the tutorial at:
+This repo effortlessly runs the command lines needed to get Romibo-V8 up and running.
 
-It uses the $9 computer C.H.I.P (which is really cheap compared to the peripherals!)
+For the full tutorial, visit http://
