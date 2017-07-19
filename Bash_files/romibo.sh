@@ -1,4 +1,3 @@
-cd
 #udpate the CHIP
 sudo apt-get update
 
@@ -33,18 +32,18 @@ cd
 
 #install MQTT for wifi connection
 sudo apt-get install dnsmasq 
-cd /home/chip/Romibo-V8/wifi
+cd home/chip/Romibo-V8/wifi
 sudo cp acces.conf /etc/dnsmasq.d
 sudo cp interfaces.conf /etc/network
-cd /
+cd
 sudo /etc/init.d/dnsmasq restart 
 cd home/chip/Romibo-V8/wifi
 sudo cp hostapd.conf /etc
-cd /
+cd
 sudo hostapd /etc/hostapd.conf 
 cd home/chip/Romibo-V8/wifi
 sudo cp systemd.service /lib/systemd/system 
-cd /
+cd
 sudo update-rc.d hostapd disable 
 sudo systemctl daemon-reload 
 sudo systemctl enable systemd
