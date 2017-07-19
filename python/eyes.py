@@ -6,37 +6,37 @@ import time
 from os import listdir
 
 #Make list of .png files used for animation of excited
-list = listdir("romibo/eyes/Romibo excited/")
+list = listdir("/home/chip/Romibo-V8/eyes/Romibo excited/")
 list.sort()
-list_for_romibo_excited=["romibo/eyes/Romibo excited/"+ i for i in list]
+list_for_romibo_excited=["/home/chip/Romibo-V8/eyes/Romibo excited/"+ i for i in list]
 
 
 #Make list of .png files used for animation of indifferent
-list = listdir("romibo/eyes/Romibo indifferent/")
+list = listdir("/home/chip/Romibo-V8/eyes/Romibo indifferent/")
 list.sort()
-list_for_romibo_indifferentShort=["romibo/eyes/Romibo indifferent/"+ i for i in list]
+list_for_romibo_indifferentShort=["/home/chip/Romibo-V8/eyes/Romibo indifferent/"+ i for i in list]
 
 #reversing blinking1
-list2 = ["romibo/eyes/Romibo indifferent/"+ i for i in list]
+list2 = ["/home/chip/Romibo-V8/eyes/Romibo indifferent/"+ i for i in list]
 list2.sort(reverse=True)
 list_for_romibo_indifferentShort=list_for_romibo_indifferentShort+ list2
 
 
 #Make list of .png files used for animation of blinking
-list = listdir("romibo/eyes/eyelid blink/")
+list = listdir("/home/chip/Romibo-V8/eyes/eyelid blink/")
 list.sort()
-list_for_romibo_eyelidBlink=["romibo/eyes/eyelid blink/"+ i for i in list]
+list_for_romibo_eyelidBlink=["/home/chip/Romibo-V8/eyes/eyelid blink/"+ i for i in list]
 
 
 #reversing blinking2
-list2 = ["romibo/eyes/eyelid blink/"+ i for i in list]
+list2 = ["/home/chip/Romibo-V8/eyes/eyelid blink/"+ i for i in list]
 list2.sort(reverse=True)
 list_for_romibo_eyelidBlink=list_for_romibo_eyelidBlink+ list2
 
 #make a list of files for animation of curious emotion
-list = listdir("romibo/eyes/Romibo curious/")
+list = listdir("/home/chip/Romibo-V8/eyes/Romibo curious/")
 list.sort()
-list_for_romibo_curious=["romibo/eyes/Romibo curious/"+ i for i in list]
+list_for_romibo_curious=["/home/chip/Romibo-V8/eyes/Romibo curious/"+ i for i in list]
 
 #debug
 #print(list_for_romibo_excited)
@@ -59,7 +59,7 @@ def animate():
     global emotion
     #If busy == False, check open emotion request file
     if busy == False:
-        file = open("emotion.txt","r")
+        file = open("/home/chip/Romibo-V8/emotion.txt","r")
         emotion = file.read(1)
         file.close()
  
@@ -105,7 +105,7 @@ def romibo_excited():
         count = 0
         busy = False
         label["image"] = romibo_normal_picture
-        file = open("emotion.txt","w")
+        file = open("/home/chip/Romibo-V8/emotion.txt","w")
         file.write("N")
         file.close()
         emotion = 'N'
@@ -126,7 +126,7 @@ def romibo_indifferent():
         count = 0
         busy = False
         label["image"] = romibo_normal_picture
-        file = open("emotion.txt","w")
+        file = open("/home/chip/Romibo-V8/emotion.txt","w")
         file.write("N")
         file.close()
         emotion = 'N'
@@ -168,8 +168,8 @@ label.place(x=20,y=100)
 romibo_excited_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_excited)
 romibo_indifferentShort_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_indifferentShort)
 romibo_eyelidBlink_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_eyelidBlink)
-romibo_curious_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_curious)
-romibo_normal_picture = tk.PhotoImage(file="romibo/eyes/romibo_normal_picture.png")
+#romibo_curious_pictures = it.cycle(tk.PhotoImage(file=img_name) for img_name in list_for_romibo_curious)
+romibo_normal_picture = tk.PhotoImage(file="/home/chip/Romibo-V8/romibo_normal_picture.png")
 
 
 # set initial eyes
@@ -202,9 +202,9 @@ for i in range(0, indifferentShort_length):
     print(img)
 
 
-for i in range(0, curious_length):
-    img = next(romibo_curious_pictures)
-    print(img)
+#for i in range(0, curious_length):
+  #  img = next(romibo_curious_pictures)
+  #  print(img)
 	
 
 root.mainloop()
