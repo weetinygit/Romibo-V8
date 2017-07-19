@@ -1,2 +1,2 @@
-cd home/chip/romibo
+cd /home/chip/romibo
 sudo python speech.py
