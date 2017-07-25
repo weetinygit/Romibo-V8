@@ -197,9 +197,9 @@ for i in range(0, blink_length):
 for i in range(0, excited_length):
     img = next(romibo_excited_pictures)
     print(img)
-for i in range(0, indifferentShort_length):
-    img = next(romibo_indifferentShort_pictures)
-    print(img)
+#for i in range(0, indifferentShort_length):
+#    img = next(romibo_indifferentShort_pictures)
+#    print(img)
 
 
 #for i in range(0, curious_length):
