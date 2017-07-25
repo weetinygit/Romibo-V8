@@ -33,8 +33,8 @@ cd
 #install MQTT for wifi connection
 sudo apt-get install dnsmasq 
 cd /home/chip/Romibo-V8/wifi
-sudo cp acces.conf /etc/dnsmasq.d
-sudo cp interfaces.conf /etc/network
+sudo cp access_point.conf /etc/dnsmasq.d
+sudo cp interfaces /etc/network
 cd /
 sudo /etc/init.d/dnsmasq restart 
 cd /home/chip/Romibo-V8/wifi
