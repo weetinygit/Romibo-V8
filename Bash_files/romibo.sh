@@ -50,5 +50,10 @@ sudo systemctl enable systemd
 sudo systemctl start systemd
 systemctl status systemd
 
+#install unclutter to remove mouse pointer
+sudo apt-get install unclutter
 
-
+#write cronjobs for running script on startup
+(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher1.sh > /home/chip/Romibo-V8/logs/cronlog 2>&1";) | sudo crontab -
+(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher1.sh > /home/chip/Romibo-V8/logs/cronlog 2>&1";) | sudo crontab -
+(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher1.sh > /home/chip/Romibo-V8/logs/cronlog 2>&1";) | sudo crontab -
