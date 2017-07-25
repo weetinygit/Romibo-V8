@@ -55,5 +55,5 @@ sudo apt-get install unclutter
 
 #write cronjobs for running script on startup
 (sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher1.sh > /home/chip/Romibo-V8/logs/cronlog 2>&1";) | sudo crontab -
-(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher1.sh > /home/chip/Romibo-V8/logs/cronlog 2>&1";) | sudo crontab -
-(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher1.sh > /home/chip/Romibo-V8/logs/cronlog 2>&1";) | sudo crontab -
+(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher2.sh > /home/chip/Romibo-V8/logs/cronlog2 2>&1";) | sudo crontab -
+(sudo crontab -l; echo "@reboot sh /home/chip/Romibo-V8/Bash_files/launcher3.sh > /home/chip/Romibo-V8/logs/cronlog3 2>&1";) | sudo crontab -
